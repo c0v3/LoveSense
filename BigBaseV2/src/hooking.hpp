@@ -21,6 +21,11 @@ namespace big
 
 		static LRESULT wndproc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam);
 		static BOOL set_cursor_pos(int x, int y);
+
+		static void *log_control_shake(int *control,int *duration,int *frequency);
+		static void* log_control_shake_supressed_id(int* control, int* UniqueId);
+
+
 	};
 
 	struct minhook_keepalive
@@ -50,6 +55,10 @@ namespace big
 
 		detour_hook m_run_script_threads_hook;
 		detour_hook m_convert_thread_to_fiber_hook;
+
+		detour_hook m_log_control_shake_hook;
+		detour_hook m_log_control_shake_supressed_id_hook;
+
 	};
 
 	inline hooking *g_hooking{};

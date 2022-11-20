@@ -6,13 +6,14 @@
 #include "natives.hpp"
 #include "gta_util.hpp"
 #include "ImGuiBitfield.h"
+#include <features.hpp>
 
 namespace big
 {
 	void base_tab::render_base_tab()
 	{
 		if (ImGui::BeginTabItem("Test"))
-		{
+		{/*
 			const char* const demo_combo[]
 			{
 				"One",
@@ -20,7 +21,7 @@ namespace big
 				"Three"
 			};
 			const double min = 0., max = 10.;
-
+			
 			//If you want to add a new option, you have to first declare it in settings.h's default_options, otherwise, this code will crash when trying to access an option that does not exist in memory.
 			if (ImGui::Checkbox("Bool", g_settings.options["demo bool"].get<bool*>()))
 				g_settings.save();
@@ -78,8 +79,42 @@ namespace big
 				}
 				QUEUE_JOB_END_CLAUSE
 			}
-
+			*/
 			ImGui::Separator();
+			//bool testtoggle = false;
+		/*	if (ImGui::Checkbox("Enable rumble logging", &big::features::control_test_toggle)) {
+
+			//	auto address = g_pointers->m_get_native_handler(g_pointers->m_native_registration_table, 0x48B3886C1358D0D5);
+
+			
+
+
+
+
+			}*/
+			ImGui::Checkbox("Enable Individual rumble  logging", &big::features::control_test_toggle);
+			
+			static bool clog = false;
+			ImGui::Checkbox("Enable controlls logging##foo1", &TOGGLES.controlls_monitor_toggle);
+			ImGui::Checkbox("Enable explosion logging##foo2", &TOGGLES.explosion_monitor_toggle);
+			
+			if (ImGui::Button("controller shake - works scuffed, needs to be in  toggle ")) {
+
+				QUEUE_JOB_BEGIN_CLAUSE()
+				{
+					
+
+
+					PAD::SET_PAD_SHAKE(0, 1000, 200);
+					//PAD::SET_PAD_SHAKE(2, 1000, 200);
+
+				}
+				QUEUE_JOB_END_CLAUSE
+
+
+				
+
+			}
 
 			if (ImGui::Button("Unload"))
 			{

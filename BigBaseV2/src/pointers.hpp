@@ -37,7 +37,15 @@ namespace big
 
 		PVOID m_model_spawn_bypass;
 
+		PVOID set_control_shake;
+		//std::int64_t *control_shake_result{};
+		PVOID set_control_shake_supressed_id;
+
+		PVOID set_control_trigger_shake;
+
 		PVOID m_native_return;
+
+
 	};
 
 	inline pointers *g_pointers{};

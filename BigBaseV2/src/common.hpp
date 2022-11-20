@@ -64,3 +64,11 @@ namespace big
 	inline DWORD g_main_thread_id{};
 	inline std::atomic_bool g_running{ true };
 }
+
+class toggles {
+	public:
+
+	bool explosion_monitor_toggle = false;
+	bool controlls_monitor_toggle = false;
+
+};inline toggles TOGGLES;

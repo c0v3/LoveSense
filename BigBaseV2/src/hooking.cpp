@@ -39,7 +39,9 @@ namespace big
 		m_set_cursor_pos_hook("SetCursorPos", memory::module("user32.dll").get_export("SetCursorPos").as<void*>(), &hooks::set_cursor_pos),
 
 		m_run_script_threads_hook("Script hook", g_pointers->m_run_script_threads, &hooks::run_script_threads),
-		m_convert_thread_to_fiber_hook("ConvertThreadToFiber", memory::module("kernel32.dll").get_export("ConvertThreadToFiber").as<void*>(), &hooks::convert_thread_to_fiber)
+		m_convert_thread_to_fiber_hook("ConvertThreadToFiber", memory::module("kernel32.dll").get_export("ConvertThreadToFiber").as<void*>(), &hooks::convert_thread_to_fiber),
+		m_log_control_shake_hook("Hook control shake",g_pointers->set_control_shake,&hooks::log_control_shake),
+		m_log_control_shake_supressed_id_hook("Hook control shake supressed id", g_pointers->set_control_shake_supressed_id, &hooks::log_control_shake_supressed_id)
 
 	{
 		m_swapchain_hook.hook(hooks::swapchain_present_index, &hooks::swapchain_present);
@@ -65,7 +67,8 @@ namespace big
 
 		m_run_script_threads_hook.enable();
 		m_convert_thread_to_fiber_hook.enable();
-
+		m_log_control_shake_hook.enable();
+		m_log_control_shake_supressed_id_hook.enable();
 		m_enabled = true;
 	}
 
@@ -80,6 +83,8 @@ namespace big
 		SetWindowLongPtrW(g_pointers->m_hwnd, GWLP_WNDPROC, reinterpret_cast<LONG_PTR>(m_og_wndproc));
 		m_swapchain_hook.disable();
 		m_get_label_text_hook.disable();
+		m_log_control_shake_hook.disable();
+		m_log_control_shake_supressed_id_hook.disable();
 	}
 
 	minhook_keepalive::minhook_keepalive()
@@ -193,4 +198,31 @@ namespace big
 		} EXCEPT_CLAUSE
 		return FALSE;
 	}
+
+	void *hooks::log_control_shake(int *control, int *duration, int *frequency) {
+		
+//	auto ctrl = g_hooking->m_log_control_shake_hook.get_original<decltype(&log_control_shake)>()(control);
+
+		LOG(INFO) << "Vibration call" << "	control:" << control << "	duration:" << duration << "	Frequency:" << frequency;
+
+	
+		return g_hooking->m_log_control_shake_hook.get_original<decltype(&log_control_shake)>()(control,duration,frequency);
+		
+
+
+	}
+	void* hooks::log_control_shake_supressed_id(int* control, int* UniqueId) {
+
+		//	auto ctrl = g_hooking->m_log_control_shake_hook.get_original<decltype(&log_control_shake)>()(control);
+
+		LOG(INFO) << "Vibration call" << "	control:" << control << "	ID:" << UniqueId;
+
+
+		return g_hooking->m_log_control_shake_supressed_id_hook.get_original<decltype(&log_control_shake_supressed_id)>()(control, UniqueId);
+
+
+
+	}
+
+
 }

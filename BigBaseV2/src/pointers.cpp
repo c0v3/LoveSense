@@ -76,6 +76,30 @@ namespace big
 			m_model_spawn_bypass = ptr.add(8).as<PVOID>();
 		});
 
+		//SET_CONTROL_SHAKE 48 89 5C 24 ? 57 48 83 EC 30 41 8B D8 8B FA 66 0F 6E C3
+
+		main_batch.add("SET_CONTROL_SHAKE", "48 89 5C 24 ? 57 48 83 EC 30 41 8B D8 8B FA 66 0F 6E C3", [this](memory::handle ptr)//kekw arxan trigger?
+			{
+				set_control_shake = ptr.as<PVOID>();
+			});
+		main_batch.add("SET_CONTROL_SHAKE_SUPPRRESSED_ID", "40 53 48 83 EC 20 8B DA 85 C9 75 09 48 8D 05 ? ? ? ?", [this](memory::handle ptr)//kekw arxan trigger?
+			{
+				set_control_shake_supressed_id = ptr.as<PVOID>();
+			});
+
+		main_batch.add("set_control_trigger_shake", "40 53 48 83 EC 20 8B DA 85 C9 75 09 48 8D 05 ? ? ? ?", [this](memory::handle ptr)//kekw arxan trigger?
+			{
+				set_control_trigger_shake = ptr.as<PVOID>();
+			});
+
+	/*	main_batch.add("Controller Rumble? result hook", "E9 ? ? ? ? CC E9 ? ? ? ? 48 8B 9C 24 ? ? ? ?", [this](memory::handle ptr)//kekw arxan trigger?
+			{
+				control_shake_result = ptr.add(67).as<std::int64_t*>();
+			});*/
+
+		//E9 ? ? ? ? CC E9 ? ? ? ? 48 8B 9C 24 ? ? ? ?
+		//E9 ? ? ? ? 0F B6 D0 48 8B 03 89 10 E9 ? ? ? ? CC CC E9 ? ? ? ? 48 87 2C 24 E9 ? ? ? ?
+
 		main_batch.add("Native return", "FF E3", [this](memory::handle ptr)
 		{
 			m_native_return = ptr.as<PVOID>();

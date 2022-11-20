@@ -7,6 +7,7 @@
 #include "gta_util.hpp"
 #include "ImGuiBitfield.h"
 #include <features.hpp>
+#include <lovense_config.hpp>
 
 namespace big
 {
@@ -92,13 +93,43 @@ namespace big
 
 
 			}*/
+
+			if (ImGui::Button("Vibrate test (epic)##foo4")) {
+				//idk if fibre pool will work or not, if not ill do a scuffed toggle
+				
+
+				//TOGGLES.cookedasf = true;
+				//g_lovense->lovensemain();
+
+				if (g_lovense->toy_connected_result) {
+
+					g_lovense->sendvibration(g_lovense->control,2,2);
+					script::get_current()->yield(2ms);
+
+					LOG(INFO) << "vibration sent";
+
+
+
+				}
+				else if (!g_lovense->toy_connected_result) {
+
+					LOG(INFO) << "toy not connected?" << "the fact this dogshit implementation got this far maybe is an ok thing tho? :)";
+				}
+
+
+
+				
+
+			}
+
+
 			ImGui::Checkbox("Enable Individual rumble  logging", &big::features::control_test_toggle);
 			
 			static bool clog = false;
 			ImGui::Checkbox("Enable controlls logging##foo1", &TOGGLES.controlls_monitor_toggle);
 			ImGui::Checkbox("Enable explosion logging##foo2", &TOGGLES.explosion_monitor_toggle);
 			
-			if (ImGui::Button("controller shake - works scuffed, needs to be in  toggle ")) {
+			if (ImGui::Button("controller shake test ")) {
 
 				QUEUE_JOB_BEGIN_CLAUSE()
 				{

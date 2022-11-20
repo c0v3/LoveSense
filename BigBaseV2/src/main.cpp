@@ -8,6 +8,8 @@
 #include "renderer.hpp"
 #include "script_mgr.hpp"
 #include "custom_text.hpp"
+#include "lovense_config.hpp"
+#pragma comment(lib, "E:/SOJU_GIT/LoveSense/vendor/lovense/lib/x64/Release/LovenseToys.lib")//harcoding bad, linking is hard (skill issue) (didnt work maybe dll still required idk)
 
 BOOL APIENTRY DllMain(HMODULE hmod, DWORD reason, PVOID)
 {
@@ -46,6 +48,10 @@ BOOL APIENTRY DllMain(HMODULE hmod, DWORD reason, PVOID)
 				auto hooking_instance = std::make_unique<hooking>();
 				LOG(INFO) << "Hooking initialized.";
 
+				auto lovense_instance = std::make_unique<lovensethread>();
+				LOG(INFO) << "Lovense initialized.";
+				//g_lovense->lovensemain();
+
 				g_settings.load();
 				LOG(INFO) << "Settings Loaded.";
 
@@ -57,6 +63,13 @@ BOOL APIENTRY DllMain(HMODULE hmod, DWORD reason, PVOID)
 				LOG(INFO) << "Hooking enabled.";
 				
 				g_custom_text.add_label_overwrite("HUD_JOINING", "Joining GTA Online with BigBaseV2");
+
+
+
+
+
+
+
 				
 				while (g_running)
 				{
@@ -73,6 +86,11 @@ BOOL APIENTRY DllMain(HMODULE hmod, DWORD reason, PVOID)
 
 				hooking_instance.reset();
 				LOG(INFO) << "Hooking uninitialized.";
+
+			//	g_lovense->lovensemaindisable();
+				lovense_instance.reset();
+				LOG(INFO) << "Lovense uninit";
+
 
 				fiber_pool_instance.reset();
 				LOG(INFO) << "Fiber pool uninitialized.";

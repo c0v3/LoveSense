@@ -5,6 +5,7 @@
 #include "script.hpp"
 #include <gta/enums.hpp>
 #include <pointers.hpp>
+#include <lovense_config.hpp>
 
 namespace big
 {
@@ -17,6 +18,28 @@ namespace big
 
 	void features::run_tick()
 	{
+	/*	if (TOGGLES.cookedasf) {
+
+
+			if (g_lovense->toy_connected_result) {
+
+				g_lovense->sendvibration();
+
+				LOG(INFO) << "vibration sent";
+
+
+
+			}
+			else if (!g_lovense->toy_connected_result) {
+
+				LOG(INFO) << "toy not connected?" << "the fact this dogshit implementation got this far maybe is an ok thing tho? :)";
+			}
+
+
+			TOGGLES.cookedasf = false;
+		}
+		*/
+
 		if (TOGGLES.explosion_monitor_toggle) {
 
 			//for (int i = 0; i < sizeof(ExplosionTypes); i++) {
@@ -49,7 +72,7 @@ namespace big
 
 
 				if (padcheck(i)) {
-					LOG(INFO) << "Pad press of type" << i << "Detected" << ControllerInputs(i);
+					LOG(INFO) << "Pad press of type " << i << " Detected ";
 				}
 
 			}

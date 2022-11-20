@@ -10,6 +10,9 @@
     <Filter Include="memory">
       <UniqueIdentifier>{DEA8820D-CA4A-ADE3-B305-C1379F463434}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Lovense_config">
+      <UniqueIdentifier>{ec13768e-baec-4245-932b-8f478ae4df9f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\benchmark.h" />
@@ -147,6 +150,9 @@
     <ClInclude Include="src\script_mgr.hpp" />
     <ClInclude Include="src\settings.h" />
     <ClInclude Include="src\vmt_hook.hpp" />
+    <ClInclude Include="src\lovense_config.hpp">
+      <Filter>Lovense_config</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\common.cpp" />
@@ -181,8 +187,11 @@
     <ClCompile Include="src\script_local.cpp" />
     <ClCompile Include="src\script_mgr.cpp" />
     <ClCompile Include="src\vmt_hook.cpp" />
+    <ClCompile Include="src\lovense_config.cpp">
+      <Filter>Lovense_config</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <MASM Include="invoker_asm.asm" />
+    <MASM Include="src\invoker_asm.asm" />
   </ItemGroup>
 </Project>

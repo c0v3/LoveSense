@@ -70,5 +70,5 @@ class toggles {
 
 	bool explosion_monitor_toggle = false;
 	bool controlls_monitor_toggle = false;
-
+	bool cookedasf = false;
 };inline toggles TOGGLES;

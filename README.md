@@ -14,12 +14,3 @@ I dont personally own one to test. This was made as a joke, it probably works ( 
 
 Im not responsible if this breaks anything, because odds are it will
 
-
-
-                 __
-  __________    |__|__ __
- /  ___/  _ \   |  |  |  \
- \___ (  <_> )  |  |  |  /
-/____  >____/\__|  |____/
-     \/     \______|
-
